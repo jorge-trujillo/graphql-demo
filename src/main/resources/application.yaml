@@ -1,0 +1,9 @@
+
+spring:
+  data:
+    mongodb:
+      database: kotlin-graphql
+      port: 27017
+
+server:
+  port: 9000

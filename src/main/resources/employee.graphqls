@@ -1,0 +1,18 @@
+scalar Date
+
+type Query {
+    employees: [Employee]
+}
+
+type Employee {
+    id: ID!
+    name: String
+    employeeId: String
+    created: Date
+    skills: [Skill]
+}
+
+type Mutation {
+    createEmployee(name: String!, employeeId: String!) : Employee!
+    deleteEmployee(id: ID!) : Boolean
+}
