@@ -9,7 +9,7 @@ type Employee {
     name: String
     employeeId: String
     created: Date
-    skills: [Skill]
+    reviews: [Review]
 }
 
 type Mutation {

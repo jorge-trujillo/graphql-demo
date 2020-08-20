@@ -5,19 +5,18 @@ import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import java.time.Instant
 
-@Document(collection = "employees")
-data class Employee(
+@Document(collection = "reviews")
+data class Review(
     @Id
     var id: String? = null,
-    val name: String? = null,
     val employeeId: String? = null,
+    val reviewText: String? = null,
+    val rating: Int? = null,
     @CreatedDate
     val created: Instant? = null
 ) {
 
-  constructor(name: String, employeeId: String) :
-      this(null, name, employeeId, null)
+  constructor(employeeId: String, reviewText: String, rating: Int) :
+      this(null, employeeId, reviewText, rating, null)
 
-  @Transient
-  var reviews: List<Review> = mutableListOf()
 }

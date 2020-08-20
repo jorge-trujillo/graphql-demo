@@ -1,0 +1,16 @@
+extend type Query {
+    reviews(employeeId: String!): [Review]
+}
+
+type Review {
+    id: ID!
+    employeeId: String
+    reviewText: String
+    rating: Int
+    created: Date
+}
+
+extend type Mutation {
+    createReview(employeeId: String!, reviewText: String!, rating: Int!) : Review!
+    deleteReview(id: ID!) : Boolean
+}

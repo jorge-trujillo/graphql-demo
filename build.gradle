@@ -154,7 +154,7 @@ task functionalTest(type: Test) {
   outputs.upToDateWhen { false }
 }
 
-/*
+// Task for those switching between a Mac and a Linux PC
 task unix {
   // Add condition to check operating system.
   onlyIf { isFamily(FAMILY_UNIX) }
@@ -165,13 +165,6 @@ task unix {
 composeUp.dependsOn(unix)
 composeDown.dependsOn(unix)
 composePull.dependsOn(unix)
-*/
-
-tasks.withType(Test) {
-  if (System.getenv('CI') != null) {
-    maxParallelForks = 1
-  }
-}
 
 dockerCompose.isRequiredBy(functionalTest)
 dockerCompose.isRequiredBy(bootRun)

@@ -1,4 +1,4 @@
-package com.jorgetrujillo.graphqldemo.repositories
+package com.jorgetrujillo.graphqldemo
 
 import com.jorgetrujillo.graphqldemo.GraphqlDemoApplication
 import groovy.util.logging.Slf4j
