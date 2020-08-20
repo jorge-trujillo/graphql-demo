@@ -9,3 +9,6 @@ Some experiments based on: https://auth0.com/blog/building-graphql-apis-with-kot
 - Kotlin does not interop well with mixed hierarchies: 
     - https://github.com/graphql-java/graphql-java/issues/1022
     - https://youtrack.jetbrains.com/issue/KT-6653
+    - Fix is apparently to use `@Suppress("ACCIDENTAL_OVERRIDE")`
+
+
