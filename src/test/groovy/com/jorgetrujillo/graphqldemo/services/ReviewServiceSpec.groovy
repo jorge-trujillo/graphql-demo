@@ -37,13 +37,26 @@ class ReviewServiceSpec extends Specification {
     Review expected = new Review('id1', 'Great job', 5)
 
     when:
-    Review actual = reviewService.save(expected)
+    reviewService.save(expected)
 
     then:
     1 * reviewService.employeeRepository.findOneByEmployeeId(expected.employeeId) >> null
     0 * _
 
     thrown(ResourceDoesNotExistException)
+  }
+
+  void 'delete a review'() {
+
+    given:
+    String id = 'id1'
+
+    when:
+    reviewService.delete(id)
+
+    then:
+    1 * reviewService.reviewRepository.deleteById(id)
+    0 * _
   }
 
 }

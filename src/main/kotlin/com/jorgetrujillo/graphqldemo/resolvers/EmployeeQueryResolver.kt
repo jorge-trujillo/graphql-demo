@@ -3,19 +3,21 @@ package com.jorgetrujillo.graphqldemo.resolvers
 import com.coxautodev.graphql.tools.GraphQLQueryResolver
 import com.jorgetrujillo.graphqldemo.domain.Employee
 import com.jorgetrujillo.graphqldemo.domain.Review
-import com.jorgetrujillo.graphqldemo.repositories.EmployeeRepository
-import com.jorgetrujillo.graphqldemo.repositories.ReviewRepository
+import com.jorgetrujillo.graphqldemo.domain.ReviewCriteria
+import com.jorgetrujillo.graphqldemo.services.EmployeeService
+import com.jorgetrujillo.graphqldemo.services.ReviewService
+import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Component
 
 @Component
 class EmployeeQueryResolver(
-    val employeeRepository: EmployeeRepository,
-    val reviewRepository: ReviewRepository
+    val employeeService: EmployeeService,
+    val reviewService: ReviewService
 ) : GraphQLQueryResolver {
 
   fun employees(): List<Employee> {
-    val employees: List<Employee> = employeeRepository.findAll()
+    val employees: List<Employee> = employeeService.list(PageRequest.of(0, 100)).content
 
     employees.onEach { employee: Employee ->
       employee.reviews = getReviews(employee.employeeId!!)
@@ -25,6 +27,6 @@ class EmployeeQueryResolver(
   }
 
   private fun getReviews(employeeId: String): List<Review> {
-    return reviewRepository.findByEmployeeId(employeeId, Pageable.unpaged()).content
+    return reviewService.list(ReviewCriteria(employeeId = employeeId), Pageable.unpaged()).content
   }
 }
