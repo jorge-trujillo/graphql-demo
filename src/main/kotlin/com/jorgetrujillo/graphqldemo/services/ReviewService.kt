@@ -14,11 +14,11 @@ import org.springframework.stereotype.Service
 
 @Service
 class ReviewService(
-    val reviewRepository: ReviewRepository,
-    val employeeRepository: EmployeeRepository
+  val reviewRepository: ReviewRepository,
+  val employeeRepository: EmployeeRepository
 ) {
 
-  fun save(review : Review) : Review {
+  fun save(review: Review): Review {
 
     if (employeeRepository.findOneByEmployeeId(review.employeeId!!) == null) {
       throw ResourceDoesNotExistException(review.employeeId, "employeeId")
@@ -30,18 +30,18 @@ class ReviewService(
   fun list(reviewCriteria: ReviewCriteria, pageable: Pageable): Page<Review> {
 
     val matcher: ExampleMatcher = ExampleMatcher.matching()
-        .withMatcher("employeeId", ignoreCase())
-        .withIgnoreNullValues()
+      .withMatcher("employeeId", ignoreCase())
+      .withIgnoreNullValues()
 
     val reviewExample: Example<Review> = Example.of(
-        Review(employeeId = reviewCriteria.employeeId),
-        matcher
+      Review(employeeId = reviewCriteria.employeeId),
+      matcher
     )
 
     return reviewRepository.findAll(reviewExample, pageable)
   }
 
-  fun delete(id : String) {
+  fun delete(id: String) {
     reviewRepository.deleteById(id)
   }
 }

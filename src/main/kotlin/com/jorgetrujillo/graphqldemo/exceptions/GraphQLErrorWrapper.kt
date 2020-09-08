@@ -5,7 +5,7 @@ import graphql.GraphQLError
 import graphql.language.SourceLocation
 
 class GraphQLErrorWrapper(
-    private val error: GraphQLError
+  private val error: GraphQLError
 ) : GraphQLError {
 
   override fun getMessage(): String? {
@@ -15,6 +15,7 @@ class GraphQLErrorWrapper(
   override fun getPath(): MutableList<Any>? {
     return error.path
   }
+
   override fun getErrorType(): ErrorType? {
     return error.errorType
   }

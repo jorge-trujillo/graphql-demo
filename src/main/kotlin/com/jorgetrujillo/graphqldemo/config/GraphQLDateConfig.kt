@@ -53,8 +53,8 @@ class GraphQLDateConfig {
   @Bean
   fun dateScalar(): GraphQLScalarType {
     return GraphQLScalarType.newScalar()
-        .name("Date")
-        .description("Java Instant as scalar.")
-        .coercing(coercing).build()
+      .name("Date")
+      .description("Java Instant as scalar.")
+      .coercing(coercing).build()
   }
 }
