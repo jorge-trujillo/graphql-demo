@@ -8,6 +8,7 @@ import com.jorgetrujillo.graphqldemo.services.EmployeeService
 import com.jorgetrujillo.graphqldemo.services.ReviewService
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Pageable
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.stereotype.Component
 
 @Component
@@ -16,6 +17,7 @@ class EmployeeQueryResolver(
     val reviewService: ReviewService
 ) : GraphQLQueryResolver {
 
+  @PreAuthorize("isAuthenticated")
   fun employees(): List<Employee> {
     val employees: List<Employee> = employeeService.list(PageRequest.of(0, 100)).content
 
@@ -26,6 +28,7 @@ class EmployeeQueryResolver(
     return employees
   }
 
+  @PreAuthorize("isAuthenticated")
   private fun getReviews(employeeId: String): List<Review> {
     return reviewService.list(ReviewCriteria(employeeId = employeeId), Pageable.unpaged()).content
   }

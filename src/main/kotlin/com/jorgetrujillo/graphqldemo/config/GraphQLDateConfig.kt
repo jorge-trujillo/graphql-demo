@@ -1,7 +1,11 @@
 package com.jorgetrujillo.graphqldemo.config
 
 import graphql.language.StringValue
-import graphql.schema.*
+import graphql.schema.Coercing
+import graphql.schema.CoercingParseLiteralException
+import graphql.schema.CoercingParseValueException
+import graphql.schema.CoercingSerializeException
+import graphql.schema.GraphQLScalarType
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import java.time.Instant
