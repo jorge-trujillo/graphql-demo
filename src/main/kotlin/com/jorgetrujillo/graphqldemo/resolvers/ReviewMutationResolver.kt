@@ -5,23 +5,23 @@ import com.jorgetrujillo.graphqldemo.domain.Review
 import com.jorgetrujillo.graphqldemo.exceptions.ResourceDoesNotExistException
 import com.jorgetrujillo.graphqldemo.repositories.EmployeeRepository
 import com.jorgetrujillo.graphqldemo.repositories.ReviewRepository
+import com.jorgetrujillo.graphqldemo.services.ReviewService
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.stereotype.Component
 
 @Component
 class ReviewMutationResolver(
-    val employeeRepository: EmployeeRepository,
-    val reviewRepository: ReviewRepository
+    val reviewService: ReviewService
 ) : GraphQLMutationResolver {
 
+  @PreAuthorize("hasAnyAuthority('EDIT', 'ADMIN')")
   fun createReview(employeeId: String, reviewText: String, rating: Int): Review {
-    if (employeeRepository.findOneByEmployeeId(employeeId) == null) {
-      throw ResourceDoesNotExistException(employeeId)
-    }
-    return reviewRepository.save(Review(employeeId, reviewText, rating))
+    return reviewService.save(Review(employeeId, reviewText, rating))
   }
 
+  @PreAuthorize("hasAuthority('ADMIN')")
   fun deleteReview(id: String): Boolean {
-    reviewRepository.deleteById(id)
+    reviewService.delete(id)
     return true
   }
 }

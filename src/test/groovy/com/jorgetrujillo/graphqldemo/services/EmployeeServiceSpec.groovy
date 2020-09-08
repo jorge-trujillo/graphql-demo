@@ -88,8 +88,7 @@ class EmployeeServiceSpec extends Specification {
     1 * employeeService.employeeRepository.findById(id) >> Optional.ofNullable(null)
     0 * _
 
-    ResourceDoesNotExistException e = thrown(ResourceDoesNotExistException)
-    e.employeeId == id
+    thrown(ResourceDoesNotExistException)
   }
 
   void 'list employees'() {
