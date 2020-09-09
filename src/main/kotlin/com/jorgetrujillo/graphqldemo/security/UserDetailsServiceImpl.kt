@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class UserDetailsServiceImpl(
-    val requestContext: RequestContext
+  val requestContext: RequestContext
 ) : UserDetailsService {
 
   /**
@@ -16,23 +16,22 @@ class UserDetailsServiceImpl(
    * In this example, use blessed headers to get group info
    */
   override fun loadUserByUsername(username: String): UserDetails {
-    //NOTE The implementation of this method is for example purposes only.
+    // NOTE The implementation of this method is for example purposes only.
     val authorities: MutableList<GrantedAuthority> = mutableListOf()
-    //val authority: SimpleGrantedAuthority = SimpleGrantedAuthority("ADMIN")
+    // val authority: SimpleGrantedAuthority = SimpleGrantedAuthority("ADMIN")
 
     requestContext.userGroups.forEach {
       authorities.add(SimpleGrantedAuthority(it.toUpperCase()))
     }
 
-    //TODO Why do we need a password here if we are pre-authenticating?
+    // TODO Why do we need a password here if we are pre-authenticating?
     val user: UserDetails = User(
-        authorities = authorities,
-        enabled = true,
-        userName = username,
-        password = "NONE"
+      authorities = authorities,
+      enabled = true,
+      userName = username,
+      password = "NONE"
     )
 
     return user
   }
-
 }

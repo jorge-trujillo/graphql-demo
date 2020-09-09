@@ -18,5 +18,4 @@ data class Review(
 
   constructor(employeeId: String, reviewText: String, rating: Int) :
       this(null, employeeId, reviewText, rating, null)
-
 }

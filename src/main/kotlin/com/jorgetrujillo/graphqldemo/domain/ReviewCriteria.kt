@@ -1,5 +1,5 @@
 package com.jorgetrujillo.graphqldemo.domain
 
 data class ReviewCriteria(
-  val employeeId : String? = null
+  val employeeId: String? = null
 )

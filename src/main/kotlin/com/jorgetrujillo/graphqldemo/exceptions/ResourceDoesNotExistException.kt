@@ -6,9 +6,9 @@ import graphql.language.SourceLocation
 import java.util.Collections
 
 class ResourceDoesNotExistException(
-    private val resourceId: String,
-    private val fieldName: String? = null
-    ) : RuntimeException("$resourceId does not exist"), GraphQLError {
+  private val resourceId: String,
+  private val fieldName: String? = null
+) : RuntimeException("$resourceId does not exist"), GraphQLError {
 
   constructor(employeeId: String) : this(employeeId, "employeeId")
 

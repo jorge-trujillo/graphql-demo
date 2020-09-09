@@ -21,5 +21,4 @@ class EmployeeMutationResolver(
     employeeService.delete(id)
     return true
   }
-
 }

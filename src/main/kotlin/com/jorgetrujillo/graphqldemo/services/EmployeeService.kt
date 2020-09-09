@@ -16,7 +16,7 @@ class EmployeeService(
   fun save(id: String? = null, employee: Employee): Employee {
     if (id == null) {
       if (employeeRepository.findOneByEmployeeId(employee.employeeId!!) != null) {
-        throw EmployeeAlreadyExistsException(employee.employeeId!!)
+        throw EmployeeAlreadyExistsException(employee.employeeId)
       }
     } else {
       if (employeeRepository.findById(id).orElse(null) == null) {

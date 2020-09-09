@@ -8,13 +8,13 @@ import org.springframework.stereotype.Component
 @Component
 class RequestContext {
 
-    val userGroups : MutableList<String> = mutableListOf()
+  val userGroups: MutableList<String> = mutableListOf()
 
-    fun addGroups(groups : List<String>) {
-        userGroups.addAll(groups)
-    }
+  fun addGroups(groups: List<String>) {
+    userGroups.addAll(groups)
+  }
 
-    fun getGroups() : List<String> {
-        return userGroups
-    }
+  fun getGroups(): List<String> {
+    return userGroups
+  }
 }

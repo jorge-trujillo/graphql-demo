@@ -18,7 +18,7 @@ class ReviewService(
     val employeeRepository: EmployeeRepository
 ) {
 
-  fun save(review : Review) : Review {
+  fun save(review: Review): Review {
 
     if (employeeRepository.findOneByEmployeeId(review.employeeId!!) == null) {
       throw ResourceDoesNotExistException(review.employeeId, "employeeId")
@@ -41,7 +41,7 @@ class ReviewService(
     return reviewRepository.findAll(reviewExample, pageable)
   }
 
-  fun delete(id : String) {
+  fun delete(id: String) {
     reviewRepository.deleteById(id)
   }
 }
