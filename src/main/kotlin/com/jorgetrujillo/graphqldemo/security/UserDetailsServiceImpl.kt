@@ -34,5 +34,4 @@ class UserDetailsServiceImpl(
 
     return user
   }
-
 }

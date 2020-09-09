@@ -58,5 +58,4 @@ class WebSecurityConfig(
     preauthAuthProvider.setPreAuthenticatedUserDetailsService(userDetailsServiceWrapper())
     return preauthAuthProvider
   }
-
 }

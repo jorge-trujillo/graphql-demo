@@ -16,5 +16,4 @@ class CustomGraphQLErrorHandler : GraphQLErrorHandler {
   override fun processErrors(list: List<GraphQLError>): List<GraphQLError> {
     return list.map { error -> GraphQLErrorWrapper(error) }
   }
-
 }
