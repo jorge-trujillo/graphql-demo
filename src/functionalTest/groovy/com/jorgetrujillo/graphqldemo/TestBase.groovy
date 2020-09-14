@@ -1,7 +1,10 @@
 package com.jorgetrujillo.graphqldemo
 
-import com.jorgetrujillo.graphqldemo.GraphqlDemoApplication
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.KotlinModule
+import com.jorgetrujillo.graphqlclient.client.GraphQLClient
 import groovy.util.logging.Slf4j
+import okhttp3.OkHttpClient
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
@@ -29,9 +32,18 @@ class TestBase extends Specification {
   MongoTemplate mongoTemplate
 
   static final int DEFAULT_PORT = 1080
-  static String urlBase
+  static String urlBase = 'http://localhost:9000/graphql'
+
+  GraphQLClient graphQLClient
 
   void setup() {
+    graphQLClient = new GraphQLClient(
+        urlBase,
+        new ObjectMapper().registerModule(new KotlinModule()),
+        new OkHttpClient()
+    )
+    graphQLClient.addGlobalHeader('SM_USER', 'user')
+    graphQLClient.addGlobalHeader('X-Groups', 'ADMIN')
   }
 
 }

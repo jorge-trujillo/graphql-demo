@@ -17,7 +17,7 @@ class EmployeeQueryResolver(
     val reviewService: ReviewService
 ) : GraphQLQueryResolver {
 
-  @PreAuthorize("isAuthenticated")
+  @PreAuthorize("isAuthenticated()")
   fun employees(): List<Employee> {
     val employees: List<Employee> = employeeService.list(PageRequest.of(0, 100)).content
 
@@ -28,7 +28,7 @@ class EmployeeQueryResolver(
     return employees
   }
 
-  @PreAuthorize("isAuthenticated")
+  @PreAuthorize("isAuthenticated()")
   private fun getReviews(employeeId: String): List<Review> {
     return reviewService.list(ReviewCriteria(employeeId = employeeId), Pageable.unpaged()).content
   }
