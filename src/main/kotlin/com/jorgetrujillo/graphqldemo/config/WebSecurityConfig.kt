@@ -20,16 +20,16 @@ import org.springframework.security.web.authentication.preauth.PreAuthenticatedA
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 class WebSecurityConfig(
-    val customUserDetailsService: UserDetailsServiceImpl,
-    val requestContext: RequestContext
+  val customUserDetailsService: UserDetailsServiceImpl,
+  val requestContext: RequestContext
 ) : WebSecurityConfigurerAdapter() {
 
   override fun configure(http: HttpSecurity) {
     http
-        .addFilterBefore(ssoFilter(), RequestHeaderAuthenticationFilterImpl::class.java)
-        .authenticationProvider(preauthAuthProvider())
-        .csrf().disable()
-        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+      .addFilterBefore(ssoFilter(), RequestHeaderAuthenticationFilterImpl::class.java)
+      .authenticationProvider(preauthAuthProvider())
+      .csrf().disable()
+      .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
   }
 
   @Bean

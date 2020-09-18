@@ -6,7 +6,7 @@ import graphql.language.SourceLocation
 import java.util.Collections
 
 class EmployeeAlreadyExistsException(
-    private val employeeId: String
+  private val employeeId: String
 ) : RuntimeException("$employeeId already exists"), GraphQLError {
 
   companion object {

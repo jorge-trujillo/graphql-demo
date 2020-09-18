@@ -32,8 +32,7 @@ class GraphQLDateConfig {
           throw CoercingParseValueException("Expected a String")
         }
       } catch (e: DateTimeParseException) {
-        throw CoercingParseValueException(String.format("Not a valid date: '%s'.", input), e
-        )
+        throw CoercingParseValueException(String.format("Not a valid date: '%s'.", input), e)
       }
     }
 

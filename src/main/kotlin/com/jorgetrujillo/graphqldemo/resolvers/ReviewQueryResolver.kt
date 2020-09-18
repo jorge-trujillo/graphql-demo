@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class ReviewQueryResolver(
-    val reviewService: ReviewService
+  val reviewService: ReviewService
 ) : GraphQLQueryResolver {
 
   @PreAuthorize("isAuthenticated")

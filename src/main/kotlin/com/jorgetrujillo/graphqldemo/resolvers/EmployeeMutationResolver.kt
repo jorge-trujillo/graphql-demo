@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class EmployeeMutationResolver(
-    val employeeService: EmployeeService
+  val employeeService: EmployeeService
 ) : GraphQLMutationResolver {
 
   @PreAuthorize("hasAnyAuthority('EDIT', 'ADMIN')")

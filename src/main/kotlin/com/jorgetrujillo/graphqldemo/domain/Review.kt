@@ -7,15 +7,15 @@ import java.time.Instant
 
 @Document(collection = "reviews")
 data class Review(
-    @Id
-    var id: String? = null,
-    val employeeId: String? = null,
-    val reviewText: String? = null,
-    val rating: Int? = null,
-    @CreatedDate
-    val created: Instant? = null
+  @Id
+  var id: String? = null,
+  val employeeId: String? = null,
+  val reviewText: String? = null,
+  val rating: Int? = null,
+  @CreatedDate
+  val created: Instant? = null
 ) {
 
   constructor(employeeId: String, reviewText: String, rating: Int) :
-      this(null, employeeId, reviewText, rating, null)
+    this(null, employeeId, reviewText, rating, null)
 }
