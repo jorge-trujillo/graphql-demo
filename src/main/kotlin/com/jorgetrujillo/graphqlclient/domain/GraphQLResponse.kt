@@ -5,5 +5,5 @@ data class GraphQLResponse<T>(
   val data: Map<String, T>?
 ) {
 
-  constructor(data: Map<String, T>): this(null, data)
+  constructor(data: Map<String, T>) : this(null, data)
 }

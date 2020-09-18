@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component
 
 @Component
 class EmployeeQueryResolver(
-    val employeeService: EmployeeService,
-    val reviewService: ReviewService
+  val employeeService: EmployeeService,
+  val reviewService: ReviewService
 ) : GraphQLQueryResolver {
 
   @PreAuthorize("isAuthenticated()")

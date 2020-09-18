@@ -18,11 +18,14 @@ class GraphQLClientSpec extends Specification {
   GraphQLClient graphQLClient
   String endpoint = 'http://endpoint'
 
+  HttpClient httpClient
+
   void setup() {
+    httpClient = Mock(HttpClient)
     graphQLClient = new GraphQLClient(
         endpoint,
         new ObjectMapper().registerModule(new KotlinModule()),
-        Mock(HttpClient)
+        httpClient
     )
   }
 
@@ -48,7 +51,7 @@ class GraphQLClientSpec extends Specification {
     GraphQLResponse<List<Student>> responseData = graphQLClient.execute(graphQLRequest)
 
     then:
-    1 * graphQLClient.httpClient.send({ HttpRequest httpRequest ->
+    1 * httpClient.send({ HttpRequest httpRequest ->
       assert httpRequest.method() == 'POST'
       assert httpRequest.uri() == new URI(endpoint)
       return true
@@ -57,7 +60,7 @@ class GraphQLClientSpec extends Specification {
 
       @Override
       int statusCode() {
-        return 0
+        return 200
       }
 
       @Override

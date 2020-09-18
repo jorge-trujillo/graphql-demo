@@ -16,13 +16,13 @@ data class GraphQLRequest(
 
   override fun toString(): String {
     val parameters = if (parameters.isNotEmpty())
-      "(${parameters.map { it.key + ": " + '"' + it.value + '"'}.joinToString( separator = ",")})"
+      "(${parameters.map { it.key + ": " + '"' + it.value + '"' }.joinToString(separator = ",")})"
     else ""
 
     return """
       ${requestType.toString().toLowerCase()} {
         ${name}$parameters {
-          ${fields.map { it.toString() }.joinToString ( separator = "\n" )}
+          ${fields.map { it.toString() }.joinToString(separator = "\n")}
       }
     }
     """

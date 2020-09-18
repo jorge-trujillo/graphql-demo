@@ -7,7 +7,7 @@ import org.springframework.security.web.authentication.preauth.RequestHeaderAuth
 import javax.servlet.http.HttpServletRequest
 
 class RequestHeaderAuthenticationFilterImpl(
-    private val requestContext: RequestContext
+  private val requestContext: RequestContext
 ) : RequestHeaderAuthenticationFilter() {
 
   companion object {

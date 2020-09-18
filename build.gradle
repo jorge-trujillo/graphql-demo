@@ -1,4 +1,6 @@
-import static org.apache.tools.ant.taskdefs.condition.Os.*
+import static org.apache.tools.ant.taskdefs.condition.Os.FAMILY_MAC
+import static org.apache.tools.ant.taskdefs.condition.Os.isFamily
+
 buildscript {
   ext {
     defaultArgs = [
@@ -9,6 +11,7 @@ buildscript {
     groovyVersion = '3.0.5'
     kotlinVersion = '1.4.0'
     kotlinReflectVersion = '1.4.0'
+    ktlintVersion = '0.38.1'
 
     jacksonVersion = '2.10.1'
     // Spring dependencies
@@ -69,7 +72,7 @@ configurations {
 }
 
 dependencies {
-  ktlint "com.pinterest:ktlint:0.35.0"
+  ktlint "com.pinterest:ktlint:${ktlintVersion}"
 
   compile "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}" // Required for Kotlin integration
   compile "org.jetbrains.kotlin:kotlin-reflect:${kotlinReflectVersion}"
@@ -86,7 +89,6 @@ dependencies {
   compile "org.codehaus.groovy:groovy-all:${groovyVersion}"
 
   // Test dependencies
-  compile "com.squareup.okhttp3:okhttp:4.8.1"
   testCompile "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
   testCompile "cglib:cglib-nodep:${cglibVersion}"
   testCompile "org.objenesis:objenesis:${objenesisVersion}"

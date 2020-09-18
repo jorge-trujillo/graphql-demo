@@ -22,7 +22,7 @@ import org.springframework.security.web.authentication.preauth.PreAuthenticatedA
 class WebSecurityConfig(
   val customUserDetailsService: UserDetailsServiceImpl,
   val requestContext: RequestContext
-): WebSecurityConfigurerAdapter() {
+) : WebSecurityConfigurerAdapter() {
 
   override fun configure(http: HttpSecurity) {
     http

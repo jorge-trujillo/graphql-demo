@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.jorgetrujillo.graphqlclient.client.GraphQLClient
 import groovy.util.logging.Slf4j
-import okhttp3.OkHttpClient
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
@@ -12,6 +11,8 @@ import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
 import spock.lang.Stepwise
+
+import java.net.http.HttpClient
 
 @SpringBootTest(
     classes = [GraphqlDemoApplication],
@@ -40,7 +41,7 @@ class TestBase extends Specification {
     graphQLClient = new GraphQLClient(
         urlBase,
         new ObjectMapper().registerModule(new KotlinModule()),
-        new OkHttpClient()
+        HttpClient.newHttpClient()
     )
     graphQLClient.addGlobalHeader('SM_USER', 'user')
     graphQLClient.addGlobalHeader('X-Groups', 'ADMIN')
