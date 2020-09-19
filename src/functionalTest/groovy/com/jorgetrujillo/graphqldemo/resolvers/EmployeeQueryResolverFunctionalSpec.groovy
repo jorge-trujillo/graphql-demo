@@ -67,4 +67,54 @@ class EmployeeQueryResolverFunctionalSpec extends TestBase {
     employees.first().reviews.size() == 1
     employees.first().reviews.first().reviewText == 'Great work'
   }
+
+  void 'list employees with reviews performance'() {
+
+    given:
+    List<Employee> employees = (0..10).collect {
+      return new Employee(
+          null,
+          'Joe' + it,
+          it as String,
+          null
+      )
+    }
+    employees.each { Employee employee ->
+      employeeRepository.save(employee)
+      (0..5).collect {
+        return new Review(
+            null,
+            employee.employeeId,
+            'Great work',
+            5,
+            null)
+      }.each { reviewRepository.save(it) }
+    }
+
+    GraphQLRequest request = new GraphQLRequestBuilder(
+        'employees',
+        GraphQLRequest.RequestType.QUERY)
+        .addField(new GraphQLField('id', null))
+        .addField(new GraphQLField('name', null))
+        .addField(new GraphQLField('reviews',
+            [
+                new GraphQLField('reviewText', null),
+                new GraphQLField('rating', null)
+            ]))
+        .build()
+
+    when:
+    long totalTime = (1..100).sum {
+      long requestStart = System.currentTimeMillis()
+      GraphQLResponse<List<Employee>> response = graphQLClient.execute(request)
+      long totalTime = System.currentTimeMillis() - requestStart
+      println("Got response in ${totalTime} ms")
+      return totalTime
+    }
+    println("Average time was ${totalTime / 100}")
+
+    then:
+    true
+  }
+
 }
