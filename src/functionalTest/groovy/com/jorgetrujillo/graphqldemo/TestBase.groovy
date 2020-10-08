@@ -7,6 +7,7 @@ import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.core.env.Environment
 import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
@@ -16,15 +17,12 @@ import java.net.http.HttpClient
 
 @SpringBootTest(
     classes = [GraphqlDemoApplication],
-    webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT
+    webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
 @ContextConfiguration(classes = [GraphqlDemoApplication])
 @Stepwise
 @Slf4j
 class TestBase extends Specification {
-
-  @Value('${server.port:8080}')
-  int port
 
   @Value('${mock_server.host}')
   String mockServerHost
@@ -32,12 +30,18 @@ class TestBase extends Specification {
   @Autowired
   MongoTemplate mongoTemplate
 
+  @Autowired
+  Environment environment
+
   static final int DEFAULT_PORT = 1080
-  static String urlBase = 'http://localhost:9000/graphql'
+  static String urlBase
 
   GraphQLClient graphQLClient
 
   void setup() {
+    String port = environment.getProperty('local.server.port')
+    urlBase = "http://localhost:$port/graphql"
+
     graphQLClient = new GraphQLClient(
         urlBase,
         new ObjectMapper().registerModule(new KotlinModule()),

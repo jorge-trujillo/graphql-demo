@@ -5,11 +5,11 @@ class GraphQLRequestBuilder(
   val requestType: GraphQLRequest.RequestType
 ) {
 
-  private val parameters: MutableMap<String, Object> = mutableMapOf()
+  private val parameters: MutableMap<String, Any> = mutableMapOf()
   private val fields: MutableList<GraphQLField> = mutableListOf()
   private val headers: MutableMap<String, String> = mutableMapOf()
 
-  fun addParameter(name: String, value: Object): GraphQLRequestBuilder {
+  fun addParameter(name: String, value: Any): GraphQLRequestBuilder {
     parameters[name] = value
     return this
   }

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 data class GraphQLRequest(
   val requestType: RequestType,
   val name: String,
-  val parameters: Map<String, Object>,
+  val parameters: Map<String, Any>,
   val fields: List<GraphQLField>,
   val headers: Map<String, String>
 ) {

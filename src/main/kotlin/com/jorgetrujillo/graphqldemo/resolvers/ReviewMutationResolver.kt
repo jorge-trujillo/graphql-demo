@@ -1,8 +1,8 @@
 package com.jorgetrujillo.graphqldemo.resolvers
 
-import com.coxautodev.graphql.tools.GraphQLMutationResolver
 import com.jorgetrujillo.graphqldemo.domain.Review
 import com.jorgetrujillo.graphqldemo.services.ReviewService
+import graphql.kickstart.tools.GraphQLMutationResolver
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.stereotype.Component
 

@@ -1,7 +1,7 @@
 package com.jorgetrujillo.graphqldemo.exceptions
 
 import graphql.GraphQLError
-import graphql.servlet.GraphQLErrorHandler
+import graphql.kickstart.execution.error.GraphQLErrorHandler
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
