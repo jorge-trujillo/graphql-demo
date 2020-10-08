@@ -1,6 +1,6 @@
 package com.jorgetrujillo.graphqldemo.exceptions
 
-import graphql.ErrorType
+import graphql.ErrorClassification
 import graphql.GraphQLError
 import graphql.language.SourceLocation
 
@@ -16,7 +16,7 @@ class GraphQLErrorWrapper(
     return error.path
   }
 
-  override fun getErrorType(): ErrorType? {
+  override fun getErrorType(): ErrorClassification? {
     return error.errorType
   }
 
